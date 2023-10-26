@@ -1,17 +1,17 @@
 #!/bin/bash
-sudo apt-get update
-sudo apt-get install -y openjdk-11-jdk
-sudo wget https://github.com/keycloak/keycloak/releases/download/21.1.2/keycloak-21.1.2.tar.gz
-sudo tar -zxvf keycloak-21.1.2.tar.gz
+# sudo apt-get update
+# sudo apt-get install -y openjdk-11-jdk
+# sudo wget https://github.com/keycloak/keycloak/releases/download/21.1.2/keycloak-21.1.2.tar.gz
+# sudo tar -zxvf keycloak-21.1.2.tar.gz
 
  
-export KEYCLOAK_ADMIN=admin
-export KEYCLOAK_ADMIN_PASSWORD=123
+# export KEYCLOAK_ADMIN=admin
+# export KEYCLOAK_ADMIN_PASSWORD=123
 
-sudo sed -i 's/#Port 22/Port 2022/g' /etc/ssh/sshd_config
-sudo systemctl restart sshd
+# sudo sed -i 's/#Port 22/Port 2022/g' /etc/ssh/sshd_config
+# sudo systemctl restart sshd
  
-sudo -E ./keycloak-21.1.2/bin/kc.sh start-dev &
+# sudo -E ./keycloak-21.1.2/bin/kc.sh start-dev &
 
 # #!/bin/bash
 
@@ -31,6 +31,16 @@ sudo -E ./keycloak-21.1.2/bin/kc.sh start-dev &
 
 # sudo source ~/.bashrc
 # sudo -E ./keycloak-21.1.2/bin/kc.sh start-dev &
+
+ver=21.1.2
+
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+wget https://github.com/keycloak/keycloak/releases/download/$ver/keycloak-$ver.tar.gz
+tar -zxvf keycloak-$ver.tar.gz
+export KEYCLOAK_ADMIN=admin
+export KEYCLOAK_ADMIN_PASSWORD=password
+sudo -E $PWD/keycloak-$ver/bin/kc.sh start-dev
 
 sudo sed -i 's/#Port 22/Port 2022/g' /etc/ssh/sshd_config
 sudo systemctl restart sshd

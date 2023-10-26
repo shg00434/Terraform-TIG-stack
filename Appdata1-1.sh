@@ -15,8 +15,14 @@ sudo systemctl start telegraf
 
 sudo cat <<EOF >> /etc/telegraf/telegraf.conf
 
+# # db-server 1 
 [[outputs.influxdb]]
-    urls = ["http://${localhost}:8086"]
+    urls = ["http://${dbaddress1}:8086"]
+    database = "${database}"
+    password = "${database_password}"
+# db-server 2 
+[[outputs.influxdb]]
+    urls = ["http://${dbaddress2}:8086"]
     database = "${database}"
     password = "${database_password}"
 
@@ -25,3 +31,14 @@ EOF
 sudo systemctl restart telegraf
 sudo sed -i 's/#Port 22/Port 2022/g' /etc/ssh/sshd_config
 sudo systemctl restart sshd
+
+# # db-server 1 # Influx DB EC2로 생성할때 사용
+# [[outputs.influxdb]]
+#     urls = ["http://${dbaddress1}:8086"]
+#     database = "${database}"
+#     password = "${database_password}"
+# # db-server 2 # Influx DB EC2로 생성할때 사용
+# [[outputs.influxdb]]
+#     urls = ["http://${dbaddress2}:8086"]
+#     database = "${database}"
+#     password = "${database_password}"

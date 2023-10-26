@@ -1,7 +1,5 @@
-##############################################################################
-#                               vpc variable                                 #
-##############################################################################
- 
+# variavle
+
 variable "vpc_cidr" {
     description = "VPC cidr block"
     type = string
@@ -39,10 +37,6 @@ variable "DnG_subnet_name" {
     default = ["BSH_DnG-1", "BSH-DnG-2"]
 }
 
-variable "PRI_subnet_cidr" {
-  default = [var.APP_subnet_cidr, var.DnG_subnet_cidr]
-}
- 
 variable "PUB_RT_name" {
     default = "PUB_RT"
 }
@@ -63,10 +57,6 @@ variable "anyway_ipv4_cidr" {
     default = "0.0.0.0/0"
 }
  
-##############################################################################
-#                               ec2 variable                                 #
-##############################################################################
- 
 variable "ami" {
    
 }
@@ -83,7 +73,7 @@ variable "app_server_name" {
    
 }
  
-variable "db_server_name" {
+variable "InfluxDB_name" {
    
 }
  

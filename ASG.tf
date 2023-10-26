@@ -2,26 +2,6 @@
 #ASG
 #=============================================================
 
-#Keycloak host ASG
-resource "aws_autoscaling_group" "Keycloak_ASG" {
-    name = "Keycloak_ASG"
-    desired_capacity = 1
-    max_size = 2
-    min_size = 1
-    health_check_grace_period = "300"
-    health_check_type = "EC2"
-    vpc_zone_identifier = [aws_subnet.APP_subnet[0].id, aws_subnet.APP_subnet[1].id ]
-    launch_template {
-      id = aws_launch_template.Keycloak_LT.id
-      version = aws_launch_template.Keycloak_LT.latest_version
-    }
-    target_group_arns = [aws_alb_target_group.Key_TG.arn]
-
-    lifecycle {
-      create_before_destroy = true
-    }
-}
-
 #Application host ASG
 resource "aws_autoscaling_group" "Application_ASG" {
     name = "APP_ASG"
